@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 
-def Close_window():
+def Close_window(event=None):
     reply = messagebox.askquestion("Quit?", "Are you sure?")
     if reply == 'yes':
         Main_Window.destroy()
@@ -25,6 +25,9 @@ def Click_Button(event=None):
 Main_Window = tk.Tk()
 
 Main_Window.title("Main Window")
+Main_Window.minsize(width=250, height=200)
+Main_Window.maxsize(width=900, height=600)
+Main_Window.geometry("800x600")
 
 label = tk.Label(Main_Window, text="Little label", font=("Times", "12"), cursor="heart")
 label.bind('<Button-1>', Click_Button)
@@ -120,5 +123,50 @@ variable.set(variable.get()+'e')
 variable.trace_vdelete('w', w_obsid)
 variable.set(variable.get()+'f')
 print(variable.get())
+
+#menus
+
+def about_app():
+    messagebox.showinfo("app", "the app that\ndoes nothing")
+
+def open_file():
+    messagebox.showinfo("Open Doc", 'we will open a file here')
+
+main_menu = tk.Menu(Main_Window)
+Main_Window.config(menu=main_menu)
+
+sub_menu_file = tk.Menu(main_menu, tearoff=0)
+main_menu.add_cascade(label='File', menu=sub_menu_file, underline=0)
+sub_menu_file.add_cascade(label='Open...', underline=0, command=open_file)
+sub_sub_menu_file = tk.Menu(sub_menu_file, tearoff=0)
+sub_menu_file.add_cascade(label='Open recent...', underline=5, menu=sub_sub_menu_file)
+
+for i in range(8):
+    number =  str(i+1)
+    sub_sub_menu_file.add_cascade(label=f'{number}. file.txt', underline=0)
+
+def on_off3():
+    global accessible
+    if accessible == tk.DISABLED:
+        accessible = tk.ACTIVE
+    else:
+        accessible = tk.DISABLED
+    sub_menu_file.entryconfigure(3, state = accessible)
+
+accessible = tk.DISABLED
+sub_menu_file.add_cascade(label="On/Off", command=on_off3)
+sub_menu_file.add_cascade(label='Switch', state=tk.DISABLED)
+
+sub_menu_file.add_separator()
+sub_menu_file.add_command(label='Quit', underline=0, command=Close_window, accelerator="Ctrl+Q")
+
+sub_menu_about = tk.Menu(main_menu)
+main_menu.add_cascade(label='About...', command=about_app, underline=1)
+
+#global bind ctrl+q to Close
+Main_Window.bind_all("<Control-q>", Close_window)
+
+#close app popup when 'X' is clicked
+Main_Window.protocol("WM_DELETE_WINDOW", Close_window)
 
 Main_Window.mainloop()
