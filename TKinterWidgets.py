@@ -169,4 +169,27 @@ Main_Window.bind_all("<Control-q>", Close_window)
 #close app popup when 'X' is clicked
 Main_Window.protocol("WM_DELETE_WINDOW", Close_window)
 
+# pre-defined modal Window
+def question():
+    # answer = messagebox.askyesno("?","to be or not to be") #returns 1 or 0
+    # answer = messagebox.askokcancel("?","to be or not to be") #returns 1 or 0
+    # answer = messagebox.askretrycancel("?","to be or not to be") #returns 1 or 0
+    answer = messagebox.askquestion("?","to be or not to be") #returns 'yes' or 'no'
+    # messagebox.showinfo('answer', 'yes' if answer==1 else 'no')
+    messagebox.showinfo('answer', answer)
+
+button_6 = tk.Button(Main_Window, text="ask yes or no", command=question)
+button_6.grid(row=0, column=1, ipadx=50)
+
+# canvas
+canvas = tk.Canvas(Main_Window, width=400, height=400, bg='yellow')
+# canvas.create_line(10, 180, 100, 10, 190, 180, 10, 180,
+# arrow=tk.BOTH, fill='red', smooth=True, width=3) # draw triangle
+canvas.create_arc(10,100, 380, 300, outline='red', width=5)
+canvas.create_arc(10, 100, 380, 300, outline='blue', fill='white',
+start=90, style=tk.CHORD, width=5)
+canvas.create_arc(10, 100, 380, 300, outline='green', width=5,
+style=tk.ARC, start=180, extent=180)
+canvas.grid(row=1, column=1)
+
 Main_Window.mainloop()
