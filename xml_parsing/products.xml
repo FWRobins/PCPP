@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<shop>
+  <category name="Vegan Products">
+  <product name="sunshine">
+    <type>cereal</type>
+    <producer>OpenEDG</producer>
+    <price>9.9</price><type>USD</type>
+  </product>
+  <product name="spahgetti">
+  <type>pasta</type>
+  <producer>programmers</producer>
+  <price>15.49</price>
+  <type>eur</type>
+</product>
+<product name="fantastic">
+  <type>beverage</type>
+  <producer>drinks4coders</producer>
+  <price>19.9</price>
+  <type>USD</type>
+</product>
+</category>
+</shop>
